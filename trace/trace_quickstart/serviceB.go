@@ -139,11 +139,13 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("service B:", resp.Body)
 
 		body, err := ioutil.ReadAll(resp.Body)
 
+		log.Println("service B:", string(body))
+
 		if err != nil {
+			log.Println("error of reading resp.Body")
 			panic(err)
 		}
 

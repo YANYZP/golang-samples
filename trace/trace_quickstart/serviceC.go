@@ -132,11 +132,11 @@ func main() {
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		itemVendorStr := r.URL.Path[1:]
 
-		// req, _ := http.NewRequest("GET", "https://www.google.com", nil)
+		req, _ := http.NewRequest("GET", "https://www.google.com", nil)
 
 		// // The trace ID from the incoming request will be
 		// // propagated to the outgoing request.
-		// req = req.WithContext(r.Context())
+		req = req.WithContext(r.Context())
 
 		//TODO: w writeString
 		_, _ = io.WriteString(w, getPriceInfo(itemVendorStr))

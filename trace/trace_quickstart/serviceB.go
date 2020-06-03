@@ -67,13 +67,13 @@ func readFromFile(fileName string) map[string][]string {
 	return vendorOfItemMap
 }
 
-func generateURL(ingredientName string) string {
+func generateURL(ingredientName string) (string, bool) {
 	vendorOfItemMap := readFromFile("vendor.txt")
 
 	vendorNameList, ok := vendorOfItemMap[ingredientName]
 
 	if !ok {
-		return "Service B: No vendor info about " + ingredientName + "\n"
+		return "Service B: No vendor info about " + ingredientName + "\n", false
 	}
 
 	URLStrBuilder := strings.Builder{}
@@ -92,7 +92,7 @@ func generateURL(ingredientName string) string {
 
 	fmt.Println("sending url", URLStr, "to service c")
 
-	return URLStr
+	return URLStr, true
 }
 
 func main() {
@@ -126,7 +126,13 @@ func main() {
 
 		ingredientName := r.URL.Path[1:]
 
-		queryStr := generateURL(ingredientName)
+		queryStr, isItemFound := generateURL(ingredientName)
+
+		if !isItemFound {
+			_, _ = io.WriteString(w, queryStr)
+			return
+
+		}
 
 		req, _ := http.NewRequest("GET", "http://34.67.111.154:7777/"+queryStr, nil)
 

@@ -71,11 +71,13 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println("service A:", resp.Body)
 
 		body, err := ioutil.ReadAll(resp.Body)
 
+		log.Println("service A:", string(body))
+
 		if err != nil {
+			log.Println("error of reading resp.Body")
 			panic(err)
 		}
 
@@ -87,10 +89,10 @@ func main() {
 	http.Handle("/", handler)
 
 	port := os.Getenv("PORT")
-	if port == "" {
-		//		port = "8080"
-		port = "7777"
-	}
+	port = "7777"
+	// if port == "" {
+	// 	//		port = "8080"
+	// }
 	log.Printf("Listening on port %s", port)
 
 	// Use an ochttp.Handler in order to instrument OpenCensus for incoming

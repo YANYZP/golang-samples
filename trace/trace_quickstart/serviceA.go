@@ -84,7 +84,7 @@ func main() {
 		_, _ = io.WriteString(w, string(body))
 
 		// Because we don't read the resp.Body, need to manually call Close().
-		resp.Body.Close()
+		//resp.Body.Close()
 	})
 	http.Handle("/", handler)
 

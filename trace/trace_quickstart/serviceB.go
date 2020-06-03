@@ -151,7 +151,7 @@ func main() {
 
 		_, _ = io.WriteString(w, string(body))
 
-		resp.Body.Close()
+		//resp.Body.Close()
 	})
 	http.Handle("/", handler)
 

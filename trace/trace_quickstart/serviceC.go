@@ -155,8 +155,8 @@ func main() {
 	http.Handle("/", handler)
 
 	port := os.Getenv("PORT")
+	port = "7777"
 	if port == "" {
-		port = "8080"
 	}
 	log.Printf("Listening on port %s", port)
 

@@ -154,9 +154,10 @@ func main() {
 	http.Handle("/", handler)
 
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	port = "7777"
+	// if port == "" {
+	// 	port = "8080"
+	// }
 	log.Printf("Listening on port %s", port)
 
 	// Use an ochttp.Handler in order to instrument OpenCensus for incoming
